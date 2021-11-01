@@ -7,7 +7,7 @@ This is a simple example to run publisher and subscriber in ROS Melodic.
 - Ubuntu 18.04 (LTS)
 - ROS Melodic
 
-## Instructions to run the code
+## Instructions to build and run the code
  - Make sure you have ROS Melodic installed in your computer. If not refer to [site](http://wiki.ros.org/melodic/Installation/Ubuntu).
  
  - Create a workspace:
