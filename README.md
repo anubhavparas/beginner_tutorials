@@ -40,7 +40,7 @@ roslaunch beginner_tutorials beginner_tutorials.launch buffer_size:=1 loop_rate:
 
 - To call the service:
 ```
-rosservice call /anubhavp/modify_string_service "inputstring: 'Let's learn ROS.'"
+rosservice call /anubhavp/modify_string_service "inputstring: 'Let us learn ROS.'"
 ```
 
 ### Running without the launch file
@@ -72,7 +72,7 @@ rosrun beginner_tutorials listener
 
 - To call the service:
 ```
-rosservice call /modify_string_service "inputstring: 'Let's learn ROS.'"
+rosservice call /modify_string_service "inputstring: 'Let us learn ROS.'"
 ```
 
 
