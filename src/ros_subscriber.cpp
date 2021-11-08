@@ -18,6 +18,10 @@ ROSSubscriber::ROSSubscriber(ros::NodeHandle ros_node_h) {
 ROSSubscriber::~ROSSubscriber() {}
 
 void ROSSubscriber::chatter_call_back(const std_msgs::String::ConstPtr& msg) {
+    if (msg == nullptr) {
+        ROS_FATAL_STREAM(
+            "ROSSubscriber::chatter_call_back: msg pointer is null");
+    }
     ROS_INFO_STREAM("Yes, I heard: "
                     << "["
                     << msg->data.c_str()

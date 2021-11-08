@@ -16,15 +16,12 @@ using beginner_tutorials::StringChange;
 
 ROSPublisher::ROSPublisher(ros::NodeHandle ros_node_h,
                            int buffer_size) {
-  if (buffer_size == 0) {
-    ROS_FATAL_STREAM("ROSPublisher::Buffer size is zero.");
-  }
   this->ros_node_h = ros_node_h;
   this->chatter_pub = this->ros_node_h.advertise<std_msgs::String>(
       "chatter", buffer_size);
 
   this->modify_str_svc_client = this->ros_node_h.serviceClient<StringChange>(
-                                                        "modify_string");
+                                                    "modify_string_service");
 }
 
 ROSPublisher::~ROSPublisher() {
