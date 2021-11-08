@@ -18,8 +18,6 @@
 #include <sstream>
 #include <string>
 
-
-
 /**
  * @brief ROSPublisher class to publish messages
  * 
@@ -56,6 +54,15 @@ class ROSPublisher {
    */
   ros::NodeHandle ros_node_h;
   ros::Publisher chatter_pub;
+  ros::ServiceClient modify_str_svc_client;
+
+  /**
+   * @brief calls the modify string service
+   * 
+   * @param input_str input string to be modified
+   * @return std::string output string
+   */
+  std::string call_modify_str_svc(std::string input_str);
 };
 
 #endif  // SRC_BEGINNER_TUTORIALS_INCLUDE_BEGINNER_TUTORIALS_ROS_PUBLISHER_HPP_
