@@ -14,10 +14,14 @@
 
 using beginner_tutorials::StringChange;
 
-ROSPublisher::ROSPublisher(ros::NodeHandle ros_node_h) {
+ROSPublisher::ROSPublisher(ros::NodeHandle ros_node_h,
+                           int buffer_size) {
+  if (buffer_size == 0) {
+    ROS_FATAL_STREAM("ROSPublisher::Buffer size is zero.");
+  }
   this->ros_node_h = ros_node_h;
   this->chatter_pub = this->ros_node_h.advertise<std_msgs::String>(
-      "chatter", 1000);
+      "chatter", buffer_size);
 
   this->modify_str_svc_client = this->ros_node_h.serviceClient<StringChange>(
                                                         "modify_string");
@@ -30,23 +34,29 @@ std::string ROSPublisher::call_modify_str_svc(std::string input_str) {
   StringChange str_change_srv;
   str_change_srv.request.inputstring = input_str;
   if (this->modify_str_svc_client.call(str_change_srv)) {
-    ROS_INFO_STREAM("Service called");
+    ROS_INFO_STREAM("ROSPublisher:: modify_string service called.");
+    ROS_DEBUG_STREAM("ROSPublisher:: modify_string service returned: "
+                     << str_change_srv.response.outputstring);
     return static_cast<std::string>(str_change_srv.response.outputstring);
   } else {
-    ROS_ERROR_STREAM("Failed to call the service /modify_string");
+    ROS_ERROR_STREAM("ROSPublisher:: Failed to call modify_string service");
     return input_str;
   }
 }
 
 
-void ROSPublisher::run_publisher() {
-  ros::Rate loop_rate(10);
+void ROSPublisher::run_publisher(int loop_rate_val) {
+  ros::Rate loop_rate(loop_rate_val);
   int count = 0;
   while (ros::ok()) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << "Hey, I am chatting. I am saying:: " << count;
+    if (count % 10 == 0) {
+      ss << "";
+    } else {
+      ss << "Hey, I am chatting. I am saying:: " << count;
+    }
 
     msg.data = this->call_modify_str_svc(ss.str());
 

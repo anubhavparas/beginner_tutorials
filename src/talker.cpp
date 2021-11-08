@@ -15,6 +15,7 @@
 #include <iostream>
 #include <memory>
 #include <sstream>
+#include <cstdlib>
 
 #include <beginner_tutorials/ros_publisher.hpp>
 
@@ -22,7 +23,11 @@
 int main(int argc, char **argv) {
   ros::init(argc, argv, "talker");
   ros::NodeHandle ros_node_h;
-  std::unique_ptr<ROSPublisher> ros_pub(new ROSPublisher(ros_node_h));
-  ros_pub->run_publisher();
+  int buffer_size = atoi(argv[1]);
+  int loop_rate = atoi(argv[2]);
+  std::unique_ptr<ROSPublisher> ros_pub(new ROSPublisher(
+                                              ros_node_h,
+                                              buffer_size));
+  ros_pub->run_publisher(loop_rate);
   return 0;
 }

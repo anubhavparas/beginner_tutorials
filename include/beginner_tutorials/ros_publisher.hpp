@@ -29,7 +29,7 @@ class ROSPublisher {
   * 
   * @param ros_node_h 
   */
-  explicit ROSPublisher(ros::NodeHandle ros_node_h);
+  ROSPublisher(ros::NodeHandle ros_node_h, int buufer_size);
 
   /**
    * @brief Destroy the ROSPublisher object
@@ -44,7 +44,7 @@ class ROSPublisher {
    * Message is: "Hey, I am chatting. I am saying:: <count>"
    * 
    */
-  virtual void run_publisher();
+  virtual void run_publisher(int loop_rate_val);
 
  private:
   /**
