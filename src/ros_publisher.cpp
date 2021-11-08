@@ -55,6 +55,9 @@ void ROSPublisher::run_publisher(int loop_rate_val) {
       ss << "Hey, I am chatting. I am saying:: " << count;
     }
 
+    ROS_INFO_STREAM("ROSPublisher::run_publisher:"
+                    << "calling service to modify string.");
+
     msg.data = this->call_modify_str_svc(ss.str());
 
     ROS_INFO_STREAM("ROSPublisher: Message to be published: "

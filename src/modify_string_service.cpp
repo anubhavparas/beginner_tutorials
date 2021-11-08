@@ -26,7 +26,7 @@ ChangeStringService::~ChangeStringService() {
 bool ChangeStringService::modify_string(
                     beginner_tutorials::StringChange::Request& req,
                     beginner_tutorials::StringChange::Response& res) {
-    ROS_INFO_STREAM("ChangeStringService::modify_string::request: "
+    ROS_DEBUG_STREAM("ChangeStringService::modify_string::request: "
                     << req.inputstring);
 
     if (req.inputstring.length() < 1) {
@@ -36,7 +36,7 @@ bool ChangeStringService::modify_string(
     }
 
     res.outputstring = "Hello World. " + req.inputstring;
-    ROS_INFO_STREAM("ChangeStringService::modify_string::response: "
+    ROS_DEBUG_STREAM("ChangeStringService::modify_string::response: "
                     << res.outputstring);
     return true;
 }
