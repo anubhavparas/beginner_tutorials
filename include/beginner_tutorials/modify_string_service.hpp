@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef SRC_BEGINNER_TUTORIALS_INCLUDE_BEGINNER_TUTORIALS_CHANGE_STRING_SERVICE_HPP_
-#define SRC_BEGINNER_TUTORIALS_INCLUDE_BEGINNER_TUTORIALS_CHANGE_STRING_SERVICE_HPP_
+#ifndef SRC_BEGINNER_TUTORIALS_INCLUDE_BEGINNER_TUTORIALS_MODIFY_STRING_SERVICE_HPP_  // NOLINT-CPP
+#define SRC_BEGINNER_TUTORIALS_INCLUDE_BEGINNER_TUTORIALS_MODIFY_STRING_SERVICE_HPP_  // NOLINT-CPP
 
 #include <beginner_tutorials/StringChange.h>
 #include <ros/ros.h>
@@ -27,7 +27,7 @@ class ChangeStringService {
    * @param ros_node_h 
    * @param service_name name of the service
    */
-    ChangeStringService(ros::NodeHandle ros_node_h, std::string service_name);
+    ChangeStringService(ros::NodeHandle ros_node_h, std::string& service_name);
 
   /**
    * @brief Destroy the Change String Service object
@@ -59,9 +59,8 @@ class ChangeStringService {
    * @return true if service is success
    * @return false if service fails
    */
-  bool modify_string(beginner_tutorials::StringChange::Request& req,
-                     beginner_tutorials::StringChange::Response& res);
-
+  bool modify_string(beginner_tutorials::StringChange::Request& req,  // NOLINT-CPP
+                     beginner_tutorials::StringChange::Response& res);  // NOLINT-CPP
 };
 
-#endif  // SRC_BEGINNER_TUTORIALS_INCLUDE_BEGINNER_TUTORIALS_CHANGE_STRING_SERVICE_HPP_
+#endif  // SRC_BEGINNER_TUTORIALS_INCLUDE_BEGINNER_TUTORIALS_MODIFY_STRING_SERVICE_HPP_  // NOLINT-CPP
