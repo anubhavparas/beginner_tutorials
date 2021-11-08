@@ -59,3 +59,8 @@ target_link_libraries(talker ${catkin_LIBRARIES})
 add_executable(listener src/listener.cpp src/ros_subscriber.cpp)
 target_link_libraries(listener ${catkin_LIBRARIES})
 
+add_executable(modify_string_service src/modify_str_svc_node.cpp src/modify_string_service.cpp)
+target_link_libraries(modify_string_service ${catkin_LIBRARIES})
+add_dependencies(modify_string_service beginner_tutorials_generate_messages_cpp)
+
+
