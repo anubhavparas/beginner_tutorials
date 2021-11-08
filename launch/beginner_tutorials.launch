@@ -1,0 +1,16 @@
+<launch>
+
+  <arg name="buffer_size" default="1" />
+  <arg name="loop_rate" default="10" />
+
+  <group ns="anubhavp">
+    <node pkg="beginner_tutorials" name="modify_string_service" type="modify_string_service"/>
+    <node pkg="beginner_tutorials" name="talker" type="talker"
+          args="$(arg buffer_size)
+                $(arg loop_rate)"
+    />
+    <node pkg="beginner_tutorials" name="listener" type="listener"/>
+  </group>
+
+
+</launch>
