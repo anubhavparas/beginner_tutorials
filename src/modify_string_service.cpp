@@ -15,7 +15,7 @@
 
 
 ChangeStringService::ChangeStringService(ros::NodeHandle ros_node_h,
-                                         std::string& service_name) :
+                                         const std::string& service_name) :
                                          svc_name(service_name) {
     this->ros_node_h = ros_node_h;
 }

@@ -27,7 +27,8 @@ class ChangeStringService {
    * @param ros_node_h 
    * @param service_name name of the service
    */
-    ChangeStringService(ros::NodeHandle ros_node_h, std::string& service_name);
+    ChangeStringService(ros::NodeHandle ros_node_h,
+                        const std::string& service_name);
 
   /**
    * @brief Destroy the Change String Service object
