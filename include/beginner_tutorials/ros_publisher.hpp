@@ -17,6 +17,9 @@
 
 #include <sstream>
 #include <string>
+#include <memory>
+
+#include <beginner_tutorials/rostf_broadcaster.hpp>
 
 /**
  * @brief ROSPublisher class to publish messages
@@ -57,12 +60,25 @@ class ROSPublisher {
   ros::ServiceClient modify_str_svc_client;
 
   /**
+   * Pointer to the ROSTfBroadcaster object to broadcast poses
+   * 
+   */
+  std::shared_ptr<ROSTfBroadcaster> tf_broadcaster;
+
+
+  /**
    * @brief calls the modify string service
    * 
    * @param input_str input string to be modified
    * @return std::string output string
    */
   std::string call_modify_str_svc(std::string input_str);
+
+  /**
+   * @brief Method to broadcast a static frame transform
+   * 
+   */
+  void broadcast_transform();
 };
 
 #endif  // SRC_BEGINNER_TUTORIALS_INCLUDE_BEGINNER_TUTORIALS_ROS_PUBLISHER_HPP_

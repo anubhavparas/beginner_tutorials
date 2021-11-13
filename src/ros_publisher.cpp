@@ -9,19 +9,22 @@
  * 
  */
 
-#include <beginner_tutorials/ros_publisher.hpp>
 #include <beginner_tutorials/StringChange.h>
+
+#include <beginner_tutorials/pose.hpp>
+#include <beginner_tutorials/ros_publisher.hpp>
 
 using beginner_tutorials::StringChange;
 
 ROSPublisher::ROSPublisher(ros::NodeHandle ros_node_h,
-                           int buffer_size) {
+                           int buffer_size) :
+                  tf_broadcaster(std::make_shared<ROSTfBroadcaster>()) {
   this->ros_node_h = ros_node_h;
   this->chatter_pub = this->ros_node_h.advertise<std_msgs::String>(
       "chatter", buffer_size);
 
   this->modify_str_svc_client = this->ros_node_h.serviceClient<StringChange>(
-                                                    "modify_string_service");
+      "modify_string_service");
 }
 
 ROSPublisher::~ROSPublisher() {
@@ -41,6 +44,19 @@ std::string ROSPublisher::call_modify_str_svc(std::string input_str) {
   }
 }
 
+void ROSPublisher::broadcast_transform() {
+  Pose pose(1.0, 1.0, 1.0, 0.0, 0.0, 1.54);
+  ROS_INFO_STREAM("Broadcasting a frame: Pose: (x,y,z): ("
+                  << pose.x << ","
+                  << pose.y << ","
+                  << pose.z << "):: "
+                  << "rpy: ("
+                  << pose.roll << ","
+                  << pose.pitch << ","
+                  << pose.yaw << ")");
+  ROS_INFO_STREAM("Parent frame: /world, Child frame: /talk");
+  this->tf_broadcaster->broadcast("world", "talk", pose);
+}
 
 void ROSPublisher::run_publisher(int loop_rate_val) {
   ros::Rate loop_rate(loop_rate_val);
@@ -63,6 +79,8 @@ void ROSPublisher::run_publisher(int loop_rate_val) {
     ROS_INFO_STREAM("ROSPublisher: Message to be published: "
                     << msg.data.c_str());
     this->chatter_pub.publish(msg);
+
+    this->broadcast_transform();
 
     ros::spinOnce();
 
