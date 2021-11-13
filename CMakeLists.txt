@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   message_generation
+  tf
 )
 
 
@@ -53,7 +54,7 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(talker src/talker.cpp src/ros_publisher.cpp)
+add_executable(talker src/talker.cpp src/ros_publisher.cpp src/rostf_broadcaster.cpp)
 target_link_libraries(talker ${catkin_LIBRARIES})
 
 add_executable(listener src/listener.cpp src/ros_subscriber.cpp)
