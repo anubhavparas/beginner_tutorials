@@ -30,6 +30,15 @@ ROSPublisher::ROSPublisher(ros::NodeHandle ros_node_h,
 ROSPublisher::~ROSPublisher() {
 }
 
+void ROSPublisher::publish_msg(const std::string& msg) {
+  std_msgs::String pub_msg;
+  pub_msg.data = msg;
+  ROS_INFO_STREAM("ROSPublisher: Message to be published: "
+                    << pub_msg.data.c_str());
+
+  this->chatter_pub.publish(pub_msg);
+}
+
 std::string ROSPublisher::call_modify_str_svc(std::string input_str) {
   StringChange str_change_srv;
   str_change_srv.request.inputstring = input_str;
@@ -62,8 +71,6 @@ void ROSPublisher::run_publisher(int loop_rate_val) {
   ros::Rate loop_rate(loop_rate_val);
   int count = 0;
   while (ros::ok()) {
-    std_msgs::String msg;
-
     std::stringstream ss;
     if (count % 10 == 0) {
       ss << "";
@@ -74,11 +81,8 @@ void ROSPublisher::run_publisher(int loop_rate_val) {
     ROS_INFO_STREAM("ROSPublisher::run_publisher:"
                     << "calling service to modify string.");
 
-    msg.data = this->call_modify_str_svc(ss.str());
-
-    ROS_INFO_STREAM("ROSPublisher: Message to be published: "
-                    << msg.data.c_str());
-    this->chatter_pub.publish(msg);
+    std::string msg = this->call_modify_str_svc(ss.str());
+    this->publish_msg(msg);
 
     this->broadcast_transform();
 

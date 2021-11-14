@@ -41,6 +41,20 @@ class ROSPublisher {
   virtual ~ROSPublisher();
 
   /**
+   * @brief to publish a message once. 
+   * 
+   */
+  virtual void publish_msg(const std::string& msg);
+
+  /**
+   * @brief calls the modify string service
+   * 
+   * @param input_str input string to be modified
+   * @return std::string output string
+   */
+  std::string call_modify_str_svc(std::string input_str);
+
+  /**
    * @brief to run the publisher node and publish messages at some fixed rate.
    * The loop rate is set to 10
    * The message that is to be sent is also fixed in this case:
@@ -65,14 +79,6 @@ class ROSPublisher {
    */
   std::shared_ptr<ROSTfBroadcaster> tf_broadcaster;
 
-
-  /**
-   * @brief calls the modify string service
-   * 
-   * @param input_str input string to be modified
-   * @return std::string output string
-   */
-  std::string call_modify_str_svc(std::string input_str);
 
   /**
    * @brief Method to broadcast a static frame transform
