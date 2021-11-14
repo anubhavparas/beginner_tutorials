@@ -17,6 +17,10 @@
 
 #include <beginner_tutorials/ros_publisher.hpp>
 
+/**
+ * @brief Helper callback method for the listner
+ * 
+ */
 struct HelperCallback {
  public:
   void callback(const std_msgs::String::ConstPtr& msg) {
@@ -25,6 +29,11 @@ struct HelperCallback {
   std::string message;
 };
 
+
+/**
+ * @brief To test if the messages are published properly
+ * 
+ */
 TEST(ROSPublisherTest, testPublishMessage) {
   ros::NodeHandle ros_node_h;
   HelperCallback cb;
@@ -35,7 +44,7 @@ TEST(ROSPublisherTest, testPublishMessage) {
                                       &HelperCallback::callback,
                                       &cb);
 
-  // wait for the publisher node to be up and broadcast tf frame
+  // wait for the publisher node to be up
   ros::WallDuration(1.0).sleep();
   ros::spinOnce();
 
@@ -45,6 +54,11 @@ TEST(ROSPublisherTest, testPublishMessage) {
   EXPECT_TRUE(subscribed_msg.find(substring_msg) != std::string::npos);
 }
 
+
+/**
+ * @brief To test the tf frame broadcaster
+ * 
+ */
 TEST(ROSPublisherTest, testTfBroadcaster) {
   tf::TransformListener tf_listener;
   tf::StampedTransform transform;
