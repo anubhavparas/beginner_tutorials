@@ -10,3 +10,4 @@ Done processing ./src/ros_publisher.cpp
 Done processing ./src/ros_subscriber.cpp
 Done processing ./src/rostf_broadcaster.cpp
 Done processing ./src/talker.cpp
+Done processing ./test/test_ros_publisher.cpp

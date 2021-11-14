@@ -54,7 +54,7 @@ TEST(ROSPublisherTest, testTfBroadcaster) {
   try {
     tf_listener.lookupTransform("/world", "/talk",
                                 ros::Time(0), transform);
-  } catch (tf::TransformException ex) {
+  } catch (tf::TransformException& ex) {
     ROS_ERROR_STREAM(ex.what());
     ros::Duration(1.0).sleep();
   }
