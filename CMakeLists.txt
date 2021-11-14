@@ -65,3 +65,11 @@ target_link_libraries(modify_string_service ${catkin_LIBRARIES})
 add_dependencies(modify_string_service beginner_tutorials_generate_messages_cpp)
 
 
+## Add gtest based cpp test target and link libraries
+if(CATKIN_ENABLE_TESTING)
+	find_package(rostest REQUIRED)
+	add_rostest_gtest(talker_test test/publisher_test.test test/test_ros_publisher.cpp src/ros_publisher.cpp src/rostf_broadcaster.cpp)
+  target_link_libraries(talker_test ${catkin_LIBRARIES})
+endif()
+
+
