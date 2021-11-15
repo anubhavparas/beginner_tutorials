@@ -136,6 +136,10 @@ This is a simple example to run publisher and subscriber with ros service in ROS
     - You can verify that the listener is now subscribing to the recorded messages.
 
 - Run a sample recorded rosbag [file](results/bag).
+    - In a new terminal start `rosmaster`:
+        ```
+        roscore
+        ```
     - In a new terminal start the listner of the `/chatter` topic:
         ```
         cd ~/pubsub_ws/
@@ -153,7 +157,7 @@ This is a simple example to run publisher and subscriber with ros service in ROS
         ```
         rosbag info record_topics.bag
         ```
-    - Play the bagfile: [Sample output](results/rosbag_replay_demo.png).
+    - Play the bag file: [Sample output](results/rosbag_replay_demo.png).
         ```
         rosbag play record_topics.bag
         ```
