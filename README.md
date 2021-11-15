@@ -119,6 +119,10 @@ This is a simple example to run publisher and subscriber with ros service in ROS
     ```
 
 - To verify the recording:
+    - Examining the bag file:
+        ```
+        rosbag info <your bagfile>
+        ```
     - Stop the /talker node and only start the listner node
         ```
         cd ~/pubsub_ws/
@@ -144,6 +148,13 @@ This is a simple example to run publisher and subscriber with ros service in ROS
         source devel/setup.bash
         roscd beginner_tutorials
         cd results/bag
+        ```
+    - Examining the bag file: [Sample output](results/rosbag_info.png).
+        ```
+        rosbag info record_topics.bag
+        ```
+    - Play the bagfile: [Sample output](results/rosbag_replay_demo.png).
+        ```
         rosbag play record_topics.bag
         ```
 
